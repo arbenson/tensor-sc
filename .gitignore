@@ -7,6 +7,6 @@ d3c_test
 d3c_cocluster
 d3c_scores
 small_flow
-large_flow
+layered_flow
 tripartite_flow
 anomaly
