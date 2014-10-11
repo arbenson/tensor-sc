@@ -5,10 +5,7 @@ import snap
 
 # Enumerate all of the directed 3 cycles in a graph.
 
-symmetrize = False
-
-def poss_d3c(w, u, v):
-    return u != w and u != v and w != u
+symmetrize = True
 
 def EnumerateDir3Cycles(G, name):
     ''' Count all directed 3 cycles in the graph.
@@ -20,8 +17,9 @@ def EnumerateDir3Cycles(G, name):
             u = u_.GetId()
             for v in u_.GetOutEdges():
                 for w in u_.GetInEdges():
-
-                    if (G.IsEdge(v, w)
+                    if not G.IsEdge(v, w) and (u != v and v != w and w != u) :
+                        continue
+                    if not G.IsEdge(v, w) and u != w:
                         continue
                     # w -> u -> v -> w
                     output.write('%d %d %d\n' % (w, v, u))
