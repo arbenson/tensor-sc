@@ -1,11 +1,10 @@
-# Directed graph: ../data/flow.txt 
-# Nodes: 6 Edges: 14
+# Directed graph: ../data/small_flow.txt 
+# Nodes: 6 Edges: 13
 # FromNodeId	ToNodeId
 0	1
 0	2
 1	0
 1	2
-1	3
 1	4
 2	0
 2	1
