@@ -45,7 +45,7 @@ const int kNumNetworks = 13;
 
 // Algorithms
 enum {
-    MULTILINEAR,            // Multilinear Spectral Clustering (MSC)
+    TENSOR,                 // Tensor Spectral Clustering (TSC)
     DIRLAP,                 // Chung's directed Laplacian
     LAP,                    // Laplacian with all edges considered undirected
     CO_U,                   // Co-clustering (left singular vector)

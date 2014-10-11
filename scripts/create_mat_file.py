@@ -23,7 +23,7 @@ def get_best(num_cut_sweep):
 
 all_data = {}
 def gather_data(data, suffix):
-    for cut_type in ['msc', 'dl', 'lap', 'alap', 'cocluster_u', 'cocluster_v', 'random']:
+    for cut_type in ['tsc', 'dl', 'lap', 'alap', 'cocluster_u', 'cocluster_v', 'random']:
         key = '%s-filter_%s_%s' % (data, cut_type, suffix)
         with open(key + '.txt') as f:
             num_cut_sweep = [float(line) for line in f]

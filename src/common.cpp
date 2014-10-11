@@ -28,8 +28,8 @@ std::vector<int> Range(int end) {
 
 std::string AlgStr(int algorithm) {
     switch (algorithm) {
-    case MULTILINEAR:
-        return "msc";
+    case TENSOR:
+        return "tsc";
     case DIRLAP:
         return "dl";
     case LAP:

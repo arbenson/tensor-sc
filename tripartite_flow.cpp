@@ -23,10 +23,10 @@ int main(int argc, char **argv) {
 	CommDetection comm(net, num_comms, D3C_ONLY_DIRLAP, cut_type, name);
 	comm.Run();
     }
-    std::cout << "MULTILINEAR ---------" << std::endl;
+    std::cout << "TENSOR ---------" << std::endl;
     {
 	Network net = Network("data", name, triple_type);
-	CommDetection comm(net, num_comms, MULTILINEAR, cut_type, name);
+	CommDetection comm(net, num_comms, TENSOR, cut_type, name);
 	comm.Run();
     }
     std::cout << "END ---------" << std::endl;

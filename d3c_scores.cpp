@@ -19,10 +19,9 @@ int main(int argc, char **argv) {
     std::string order_dir = "orders/";
 
     int cut_type = D3C_COND;
-#if 0
-    std::cout << "MULTI ----";
+    std::cout << "TENSOR ----";
     {
-	std::string alg = AlgStr(MULTILINEAR);
+	std::string alg = AlgStr(TENSOR);
 	Network net = GetNetwork(network, triple_type);
 	Cutter cutter(net, 0, cut_type, name + "_" + alg);
 
@@ -70,7 +69,6 @@ int main(int argc, char **argv) {
 	std::vector<int> order = ReadVector<int>(file);
 	std::vector<int> cut = cutter.GetCut(order);
     }
-#endif
     std::cout << "Co-U ----";
     {
 	std::string alg = AlgStr(CO_U);

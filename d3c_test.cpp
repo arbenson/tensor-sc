@@ -15,10 +15,10 @@ int main(int argc, char **argv) {
     int cut_type = D3C_COND;
     std::string name = NetworkStr(network);
 
-    std::cout << "MULTI ---------" << std::endl;
+    std::cout << "TENSOR ---------" << std::endl;
     {
 	Network net = GetNetwork(network, triple_type);
-	CommDetection comm(net, num_comms, MULTILINEAR, cut_type, name);
+	CommDetection comm(net, num_comms, TENSOR, cut_type, name);
 	comm.Run();
     }
     std::cout << "DIRLAP ---------" << std::endl;

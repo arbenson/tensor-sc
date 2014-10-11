@@ -90,10 +90,16 @@ void OnlyD3CEdges(PNGraph& dir_graph, PNGraph& d3c_graph, bool recip_edges) {
             for (int in_edge = 0; in_edge < curr_node_it.GetInDeg(); ++in_edge) {
                 int in_node = curr_node_it.GetInNId(in_edge);
 		if (out_node == in_node && !recip_edges) { continue; }
-                if (dir_graph->IsEdge(out_node, in_node)) {
-                    if (!d3c_graph->IsEdge(out_node, in_node)) { d3c_graph->AddEdge(out_node, in_node); }
-                    if (!d3c_graph->IsEdge(in_node, curr_node)) { d3c_graph->AddEdge(in_node, curr_node); }
-                    if (!d3c_graph->IsEdge(curr_node, out_node)) { d3c_graph->AddEdge(curr_node, out_node); }
+                if (dir_graph->IsEdge(out_node, in_node) || recip_edges) {
+                    if (!d3c_graph->IsEdge(out_node, in_node)) {
+			d3c_graph->AddEdge(out_node, in_node);
+		    }
+                    if (!d3c_graph->IsEdge(in_node, curr_node)) {
+			d3c_graph->AddEdge(in_node, curr_node);
+		    }
+                    if (!d3c_graph->IsEdge(curr_node, out_node)) {
+			d3c_graph->AddEdge(curr_node, out_node);
+		    }
                 }
             }
         }

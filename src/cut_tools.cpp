@@ -716,7 +716,7 @@ std::vector<int> Cutter::GetOrder() {
     int max_iter = 1000;
 
     switch (algorithm_) {
-    case MULTILINEAR:
+    case TENSOR:
         {
             // TODO(arbenson): make these parameters arguments
             double alpha = 0.99;

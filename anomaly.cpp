@@ -28,10 +28,10 @@ int main(int argc, char **argv) {
 	std::vector<int> comms = comm.Communities();
 	WriteVector(comms, "anomaly_subdl_comms.txt");
     }
-    std::cout << "MULTILINEAR ---------" << std::endl;
+    std::cout << "TENSOR ---------" << std::endl;
     {
 	Network net = Network("data", name, triple_type);
-	CommDetection comm(net, num_comms, MULTILINEAR, cut_type, name);
+	CommDetection comm(net, num_comms, TENSOR, cut_type, name);
 	comm.Run();
 	std::vector<int> comms = comm.Communities();
 	WriteVector(comms, "anomaly_msc_comms.txt");

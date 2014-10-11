@@ -45,12 +45,12 @@ def get_data(alg):
     return get_best(all_data)
 
 
-multi_inds, multi_vals = get_data('msc')
+multi_inds, multi_vals = get_data('tsc')
 dirlap_inds, dirlap_vals = get_data('dl')
 lap_inds, lap_vals = get_data('lap')
 alap_inds, alap_vals = get_data('alap')
-co_u_inds, co_u_vals = get_data('cocluster_u')
-co_v_inds, co_v_vals = get_data('cocluster_v')
+#co_u_inds, co_u_vals = get_data('cocluster_u')
+#co_v_inds, co_v_vals = get_data('cocluster_v')
 random_inds, random_vals = get_data('random')
 
 
@@ -65,15 +65,13 @@ plt.loglog(multi_inds, multi_vals, 'r--',
            dirlap_inds, dirlap_vals, 'g--',
            lap_inds, lap_vals, 'y--',
            alap_inds, alap_vals, 'k--',
-           co_u_inds, co_u_vals, 'm--',
-           co_v_inds, co_v_vals, 'c--',
            random_inds, random_vals, 'b--')
 
 
 plt.ylabel(suffix)
 plt.xlabel('min($|S|$, $|\\bar{S}|$)')
-#plt.legend(['multi-linear', 'dirlap', 'lap', 'alap', 'co-u', 'co-v', 'random'],
-#           loc='upper right')
+plt.legend(['multi-linear', 'dirlap', 'lap', 'alap', 'random'],
+           loc='upper left')
 
 plt.title(data.split('/')[-1])
 plt.show()

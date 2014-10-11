@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     std::cout << "TENSOR ---------" << std::endl;
     {
 	Network net = Network("data", name, triple_type);
-	CommDetection comm(net, num_comms, MULTILINEAR, cut_type, name);
+	CommDetection comm(net, num_comms, TENSOR, cut_type, name);
 	comm.Run();
 	std::vector<int> comms = comm.Communities();
 	WriteVector(comms, "layered_flow_tsc_comms.txt");
