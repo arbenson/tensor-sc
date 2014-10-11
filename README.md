@@ -7,6 +7,8 @@ Austin R. Benson, David F. Gleich, and Jure Leskovec. "Tensor Spectral Clusterin
 
 The code is released under the simplified BSD license.  Please see the LICENSE file.
 
+For help using the code, please contact Austin: arbenson AT stanford DOT edu.
+
 
 Getting started
 =========
