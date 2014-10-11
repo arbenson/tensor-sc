@@ -1,7 +1,7 @@
 tensor-sc
 =========
 
-Tensor spectral clustering.
+Tensor Spectral Clustering.
 
 
 Getting started
@@ -20,6 +20,10 @@ Layered flow example
 First, build the example:
 
     make layered_flow
+
+Run the algorithms:
+
+    ./layered_flow
 
 Look at the communities for tensor spectral clustering, the directed Laplacian, and the subgraph directed Laplacian:
 
