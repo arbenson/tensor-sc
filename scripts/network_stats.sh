@@ -1,0 +1,12 @@
+python scripts/network_stats.py data/soc-Slashdot0811-filter.txt
+python scripts/network_stats.py data/wiki-Vote-filter.txt
+python scripts/network_stats.py data/amazon0312-filter.txt
+python scripts/network_stats.py data/as-caida20071105-filter.txt
+python scripts/network_stats.py data/cit-HepPh-filter.txt
+python scripts/network_stats.py data/email-EuAll-filter.txt
+python scripts/network_stats.py data/soc-Epinions1-filter.txt
+python scripts/network_stats.py data/twitter_combined-filter.txt
+python scripts/network_stats.py data/web-Stanford-filter.txt
+python scripts/network_stats.py data/wiki-RfA-net-filter.txt
+python scripts/network_stats.py data/wiki-Talk-filter.txt
+python scripts/network_stats.py data/email-Enron-filter.txt
