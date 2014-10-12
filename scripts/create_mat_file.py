@@ -8,29 +8,37 @@ import sys
 Create a .mat file of all the data so that we can plot things in Matlab.
 '''
 
-def get_best(num_cut_sweep):
+def get_best(num_cut_sweep, suffix):
     best = {}
     total = len(num_cut_sweep)
     for i, num_cut in enumerate(num_cut_sweep):
         min_size = min(i + 1, total - (i + 1))
-        if min_size in best:
-            best[min_size] = min(num_cut, best[min_size])
+        if suffix == 'density' and num_cut > 1.0:
+            val = 0.0
         else:
-            best[min_size] = num_cut
+            val = num_cut
+            
+        if min_size in best:
+            if suffix == 'density':
+                best[min_size] = max(val, best[min_size])
+            else:
+                best[min_size] = min(val, best[min_size])
+        else:
+            best[min_size] = val
 
     return zip(*sorted(best.items()))
 
 
 all_data = {}
 def gather_data(data, suffix):
-    for cut_type in ['tsc', 'dl', 'lap', 'alap', 'cocluster_u', 'cocluster_v', 'random']:
+    for cut_type in ['msc', 'dl', 'lap', 'alap', 'cocluster_u', 'cocluster_v', 'random']:
         key = '%s-filter_%s_%s' % (data, cut_type, suffix)
         with open(key + '.txt') as f:
             num_cut_sweep = [float(line) for line in f]
             # Format for Matlab
             key = key.split('/')[-1]
             key = key.replace('-', '_')
-            all_data[key] = get_best(num_cut_sweep)
+            all_data[key] = get_best(num_cut_sweep, suffix)
 
 for data_set in ['soc-Slashdot0811', 'wiki-Vote', 'as-caida20071105',
                  'email-Enron', 'soc-Epinions1', 'amazon0312',
