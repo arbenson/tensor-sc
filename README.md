@@ -3,7 +3,7 @@ tensor-sc
 
 Tensor Spectral Clustering.  This is the code used in the paper:
 
-Austin R. Benson, David F. Gleich, and Jure Leskovec. "Tensor Spectral Clustering", 2014.
+Austin R. Benson, David F. Gleich, and Jure Leskovec. "Tensor Spectral Clustering for Partitioning Higher-order Network Structures", 2014.
 
 The code is released under the simplified BSD license.  Please see the LICENSE file.
 
