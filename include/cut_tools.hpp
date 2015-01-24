@@ -52,14 +52,6 @@ public:
     std::vector<int> Density(std::vector<int>& order, PNGraph& graph,
 			     std::vector<Tuple>& triples);
 
-    std::vector<int> D3CCond2Cut(std::vector<int>& order, PNGraph& graph,
-				std::vector<Tuple>& triples, bool recip_edges,
-				bool no_back);
-
-    std::vector<int> D3CTouchCut(std::vector<int>& order, PNGraph& graph,
-				std::vector<Tuple>& triples, bool recip_edges,
-				bool no_back);
-
     std::vector<int> D3CNormalizedCut(std::vector<int>& order, PNGraph& graph,
 				      std::vector<Tuple>& triples, bool recip_edges,
 				      bool no_back);
