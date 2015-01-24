@@ -64,4 +64,5 @@ all: d3c_test d3c_cocluster d3c_scores small_flow layered_flow tripartite_flow a
 
 .PHONY : clean
 clean :
-	rm -rf *.o *~ d3c_test d3c_cocluster d3c_scores small_flow layered_flow tripartite_flow anomaly
+	rm -rf *.o *~ d3c_test d3c_cocluster d3c_scores small_flow layered_flow tripartite_flow anomaly motif_cut
+
