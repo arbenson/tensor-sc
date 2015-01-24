@@ -9,6 +9,9 @@
 // Read the list of triples from the file specified by file_name.
 std::vector<Tuple> ReadTriples(std::string file_name);
 
+// Read the list of triples from the file specified by file_name.
+std::vector<Tuple> ReadTriplesAndDuplicate(std::string file_name);
+
 
 // Read the list of triples from the file specified by file_name.
 template <typename T>

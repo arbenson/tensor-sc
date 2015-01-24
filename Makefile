@@ -45,6 +45,9 @@ d3c_scores: $(OBJECTS) d3c_scores.cpp
 small_flow: $(OBJECTS) small_flow.cpp
 	$(CXX) $(CFLAGS) small_flow.cpp $(LDFLAGS) $(SNAP_OBJ) $(OBJECTS) $(LDLIBS) -o small_flow
 
+motif_cut: $(OBJECTS) motif_cut.cpp
+	$(CXX) $(CFLAGS) motif_cut.cpp $(LDFLAGS) $(SNAP_OBJ) $(OBJECTS) $(LDLIBS) -o motif_cut
+
 layered_flow: $(OBJECTS) layered_flow.cpp
 	$(CXX) $(CFLAGS) layered_flow.cpp $(LDFLAGS) $(SNAP_OBJ) $(OBJECTS) $(LDLIBS) -o layered_flow
 

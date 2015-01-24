@@ -73,6 +73,14 @@ Network::Network(std::string data_dir, std::string name, int triple_type) {
 }
 
 
+Network::Network(std::string network_path, std::string trips_path) {
+    triples_ = ReadTriplesAndDuplicate(trips_path);
+    graph_ = TSnap::LoadEdgeList<PNGraph>(network_path.c_str(), 0, 1);
+    counts_ = Counts(graph_->GetNodes());
+    CountPairs(counts_, triples_);
+}
+
+
 int Network::NodeIndex(int i) {
     if (i < 0 || i > index_.size()) {
         throw std::out_of_range("Node index out of range");

@@ -13,4 +13,3 @@ Gout = snap.ConvertGraph(snap.PNGraph, MxScc, True)
 print 'Number of nodes: ', Gout.GetNodes()
 print 'Number of edges: ', Gout.GetEdges()
 snap.SaveEdgeList(Gout, graph)
-

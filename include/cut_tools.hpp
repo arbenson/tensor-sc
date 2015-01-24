@@ -80,9 +80,9 @@ public:
 
     std::vector<int> GetCut(std::vector<int>& order);
 
-private:
     std::vector<int> GetOrder();
 
+private:
     Network network_;
     int algorithm_;
     int cut_type_;

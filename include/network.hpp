@@ -36,6 +36,8 @@ public:
     // name is the location of the 
     Network(std::string data_dir, std::string name, int triple_type);
 
+    Network(std::string network_path, std::string trips_path);
+
     // graph is the graph object
     // triples is the list of triples (e.g., directed 3-cycles)
     // cut is the partition we are going to use on the network.
