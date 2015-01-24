@@ -358,7 +358,7 @@ void D3CVolumes(std::vector<int>& order, PNGraph& graph,
     std::vector<int> order_inv = inverse_vector(order);
     num_cut.resize(order.size(), 0);
     vol_S.resize(order.size(), 0);
-    vol_Sbar.resize(order.size(), triples.size());
+    vol_Sbar.resize(order.size(), 3 * triples.size());
 
     for (int index = 0; index < order.size(); ++index) {
         int curr_node = order[index];
@@ -378,16 +378,17 @@ void D3CVolumes(std::vector<int>& order, PNGraph& graph,
                                 graph->IsEdge(out_node, curr_node))) { continue; }
                 if (!graph->IsEdge(out_node, in_node)) { continue; }
 
+		vol_S[index] += 6;
+		vol_Sbar[index] -= 6;
+		
                 if  (std::max(order_inv[out_node], order_inv[in_node]) < index) {
                     // The directed 3 cycle is no longer cut.  out_node and in_node are
                     // currently in the cut and we are adding the current node.
                     num_cut[index] -= 6;
-                    vol_S[index] += 6;
                 } else if (std::min(order_inv[out_node], order_inv[in_node]) > index) {
                     // The directed 3 cycle is now cut.  All nodes were _not_ in the cut
                     // and now the current node is being added to the cut.
                     num_cut[index] += 6;
-                    vol_Sbar[index] -= 6;
                 }
             }
         }
@@ -399,76 +400,7 @@ void D3CVolumes(std::vector<int>& order, PNGraph& graph,
     if (vol_Sbar.back() != 0) {
 	throw std::logic_error("Bad vol_Sbar counting.");
     }
-    if (vol_S.back() != triples.size()) {
-	throw std::logic_error("Bad vol_S counting.");
-    }
-}
-
-
-void D3CVolumes2(std::vector<int>& order, PNGraph& graph,
-                 std::vector<Tuple>& triples,
-                 std::vector<int>& num_cut_S, std::vector<int>& num_cut_Sbar,
-                 std::vector<int>& vol_S2, std::vector<int>& vol_Sbar2,
-                 bool count_recip_edges, bool no_back=false) {
-    std::vector<int> order_inv = inverse_vector(order);
-    vol_S2.resize(order.size(), 0);
-    vol_Sbar2.resize(order.size(), triples.size());
-    num_cut_S.resize(order.size(), 0);
-    num_cut_Sbar.resize(order.size(), 0);
-
-    std::vector<int> num_cut(order.size(), 0);
-
-    for (int index = 0; index < order.size(); ++index) {
-        int curr_node = order[index];
-        if (index > 0) {
-            num_cut[index] = num_cut[index - 1];
-            num_cut_S[index] = num_cut_S[index - 1];
-            num_cut_Sbar[index] = num_cut_Sbar[index - 1];
-            vol_S2[index] = vol_S2[index - 1];
-            vol_Sbar2[index] = vol_Sbar2[index - 1];
-        }
-        auto curr_node_it = graph->GetNI(curr_node);
-        for (int out_edge = 0; out_edge < curr_node_it.GetOutDeg(); ++out_edge) {
-            int out_node = curr_node_it.GetOutNId(out_edge);
-            for (int in_edge = 0; in_edge < curr_node_it.GetInDeg(); ++in_edge) {
-                int in_node = curr_node_it.GetInNId(in_edge);
-                if (!count_recip_edges && out_node == in_node) { continue; }
-                if (no_back && (graph->IsEdge(in_node, out_node) ||
-                                graph->IsEdge(curr_node, in_node) ||
-                                graph->IsEdge(out_node, curr_node))) { continue; }
-                if (!graph->IsEdge(out_node, in_node)) { continue; }
-
-                if  (std::max(order_inv[out_node], order_inv[in_node]) < index) {
-                    // The directed 3 cycle is no longer cut.  out_node and in_node are
-                    // currently in the S and we are adding the current node to S.
-                    num_cut[index] -= 6;
-                    num_cut_S[index] -= 6;
-                } else if (std::min(order_inv[out_node], order_inv[in_node]) > index) {
-                    // The directed 3 cycle is now cut.  All nodes were _not_ in S
-                    // and now the current node is being added to the S.
-                    num_cut[index] += 6;
-                    num_cut_Sbar[index] += 6;
-                } else if (std::min(order_inv[out_node], order_inv[in_node]) < index &&
-                           std::max(order_inv[out_node], order_inv[in_node]) > index) {
-                    vol_Sbar2[index] -= 6;
-                    vol_S2[index] += 6;
-                    num_cut_S[index] += 6;
-                    num_cut_Sbar[index] -= 6;
-                }
-            }
-        }
-        assert(num_cut_Sbar[index] <= vol_Sbar2[index]);
-        assert(num_cut_S[index] <= vol_S2[index]);
-        assert(num_cut_Sbar[index] + num_cut_S[index] == num_cut[index]);
-    }
-
-    if (num_cut.back() != 0) {
-	throw std::logic_error("Bad directed 3 cycle cut counting.");
-    }
-    if (vol_Sbar2.back() != 0) {
-	throw std::logic_error("Bad vol_Sbar counting.");
-    }
-    if (vol_S2.back() != triples.size()) {
+    if (vol_S.back() != 3 * triples.size()) {
 	throw std::logic_error("Bad vol_S counting.");
     }
 }
@@ -524,41 +456,6 @@ std::vector<int> Cutter::D3CCondCut(std::vector<int>& order, PNGraph& graph,
     if (name_ != "") {
         WriteVector(num_cut, name_ + "_num_cut.txt");
         WriteVector(scores, name_ + "_d3c_cond.txt");
-    }
-#endif
-
-    return BestCut(scores, order);
-}
-
-std::vector<int> Cutter::D3CCond2Cut(std::vector<int>& order, PNGraph& graph,
-                                     std::vector<Tuple>& triples, bool recip_edges,
-                                     bool no_back) {
-    std::vector<int> num_cut_S;
-    std::vector<int> num_cut_Sbar;
-    std::vector<int> vol_S;
-    std::vector<int> vol_Sbar;
-    D3CVolumes2(order, graph, triples, num_cut_S, num_cut_Sbar,
-                vol_S, vol_Sbar, recip_edges, no_back);
-    
-    std::vector<double> scores(order.size(), kBadScore);
-    for (int i = 0; i < order.size(); ++i) {
-        if (vol_S[i] == 0 || vol_Sbar[i] == 0) {
-            // Nothing is cut.
-            scores[i] = kBadScore;
-        } else {
-            double score_S = static_cast<double>(num_cut_S[i]) / vol_S[i];
-            double score_Sbar = static_cast<double>(num_cut_Sbar[i]) / vol_Sbar[i];
-            if (score_S > score_Sbar) {
-                scores[i] = score_S;
-            } else {
-                scores[i] = score_Sbar;
-            }
-        }
-    }
-    
-#ifdef _VERBOSE_
-    if (name_ != "") {
-        WriteVector(scores, name_ + "_d3c_cond2.txt");
     }
 #endif
 
@@ -625,42 +522,6 @@ std::vector<int> Cutter::D3CNormalizedCut(std::vector<int>& order, PNGraph& grap
     if (name_ != "") {
         WriteVector(num_cut, name_ + "_num_cut.txt");
         WriteVector(scores, name_ + "_d3c_ncut.txt");
-    }
-#endif
-
-    return BestCut(scores, order);
-}
-
-
-std::vector<int> Cutter::D3CTouchCut(std::vector<int>& order, PNGraph& graph,
-                                     std::vector<Tuple>& triples, bool recip_edges,
-                                     bool no_back) {
-    std::vector<int> num_cut;
-    std::vector<int> vol_S;
-    std::vector<int> vol_Sbar;
-    D3CVolumes(order, graph, triples, num_cut, vol_S, vol_Sbar,
-               recip_edges, no_back);
-
-    std::vector<double> scores(order.size(), kBadScore);
-    for (int i = 0; i < order.size(); ++i) {
-        if (vol_S[i] == 0 || vol_Sbar[i] == 0) {
-            // Nothing is cut.
-            scores[i] = kBadScore;
-        } else {
-            int touch_S = triples.size() - vol_Sbar[i];
-            int touch_Sbar = triples.size() - vol_S[i];
-            if (touch_S < touch_Sbar) {
-                scores[i] = static_cast<double>(num_cut[i]) / touch_S;
-            } else {
-                scores[i] = static_cast<double>(num_cut[i]) / touch_Sbar;
-            }
-        }
-    }
-
-#ifdef _VERBOSE_
-    if (name_ != "") {
-        WriteVector(num_cut, name_ + "_num_cut.txt");
-        WriteVector(scores, name_ + "_touch.txt");
     }
 #endif
 
@@ -821,10 +682,6 @@ std::vector<int> Cutter::GetCut(std::vector<int>& order) {
         return D3CCondCut(order, graph(), triples(), false, false);
     case DENSITY:
         return Density(order, graph(), triples());
-    case D3C_TOUCH:
-        return D3CTouchCut(order, graph(), triples(), false, false);
-    case D3C_COND_2NODE:
-        return D3CCond2Cut(order, graph(), triples(), false, false);
     case D3C_EXPANSION:
         return D3CExpansionCut(order, graph(), triples(), false);
     case D3C_NORMALIZED:
