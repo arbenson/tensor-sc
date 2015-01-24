@@ -63,12 +63,9 @@ enum {
 // Cut types
 enum {
     D3C_COND,             // cut3(S) / min(vol3(S), vol3(Sbar))
-    D3C_COND_2NODE,       // max(#(D3C cut w/ 2 nodes in S)    / #(D3C w/ >= 2 nodes in S),
-                          //     #(D3C cut w/ 2 nodes in Sbar) / #(D3C w/ >= 2 nodes in Sbar))
     D3C_EXPANSION,        // cut3(S) / min(|S|, |Sbar|)
     D3C_NORMALIZED,       // cut3(S) (1 / vol3(S) + 1 / vol3(Sbar))
     D3C_COND_RECIP,       // D3C_COND, but count reciprocated edges
-    D3C_TOUCH,            // cut3(S) / min(vol(V) - vol(S), vol(V) - vol(Sbar))
     D3C_EXPANSION_RECIP,  // D3C_EXPANSION, but count reciprocated edges
     D3C_NOBACK_COND,      // D3C_COND, but only look at D3Cs with no back edges
     BIPARTITE,            // Number of edges cut
