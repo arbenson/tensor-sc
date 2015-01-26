@@ -3,7 +3,7 @@ import sys
 data_file = sys.argv[1]
 
 def thick_line(i, j):
-  return '\\path[draw, ultra thick] (%s) edge [->] (%s);' % (i, j)    
+  return '\\path[draw, ultra thick] (%s) edge [->] (%s);' % (i, j)
 
 def thin_line(i, j):
   return '\\path[draw, dashed] (%s) edge [->] (%s);' % (i, j)    

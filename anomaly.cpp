@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
 	CommDetection comm(net, num_comms, TENSOR, cut_type, name);
 	comm.Run();
 	std::vector<int> comms = comm.Communities();
-	WriteVector(comms, "anomaly_msc_comms.txt");
+	WriteVector(comms, "anomaly_tsc_comms.txt");
     }
     std::cout << "END ---------" << std::endl;
 }

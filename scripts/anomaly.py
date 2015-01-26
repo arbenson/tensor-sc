@@ -6,7 +6,7 @@ G = snap.PNGraph.New()
 set1 = range(0, 2)
 set2 = range(2, 4)
 set3 = range(4, 6)
-set4 = range(6, 20)
+set4 = range(6, 22)
 
 for i in set1 + set2 + set3 + set4:
     G.AddNode(i)
@@ -34,12 +34,12 @@ add_edges(set1, set2, p)
 add_edges(set2, set3, p)
 add_edges(set3, set1, p)
 
-num = 2
+num = 4
 AddRandEdges(set1, set4, num, True)
 AddRandEdges(set2, set4, num, True)
 AddRandEdges(set3, set4, num, True)
 
-num = 1
+num = 2
 AddRandEdges(set1, set4, num, False)
 AddRandEdges(set2, set4, num, False)
 AddRandEdges(set3, set4, num, False)
