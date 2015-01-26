@@ -3,7 +3,10 @@ tensor-sc
 
 Tensor Spectral Clustering.  This is the code used in the paper:
 
-Austin R. Benson, David F. Gleich, and Jure Leskovec. "Tensor Spectral Clustering for Partitioning Higher-order Network Structures", 2014.
+Austin R. Benson, David F. Gleich, and Jure Leskovec. "Tensor Spectral Clustering for Partitioning Higher-order Network Structures".
+In Proceedings of the 2015 SIAM International Conference on Data Mining (SDM), 2015.
+
+The full version of the paper is available [here](http://stanford.edu/~arbenson/papers/tsc15.pdf).
 
 The code is released under the simplified BSD license.  Please see the LICENSE file.
 
@@ -36,6 +39,24 @@ Look at the communities for tensor spectral clustering, the directed Laplacian, 
     cat layered_flow_tsc_comms.txt
     cat layered_flow_dl_comms.txt
     cat layered_flow_subdl_comms.txt
+
+
+Anomaly detection example
+=========
+
+First, build the example:
+
+    make anomaly
+
+Run the algorithms:
+
+    ./anomaly
+
+Look at the communities for tensor spectral clustering, the directed Laplacian, and the subgraph directed Laplacian:
+
+    cat anomaly_tsc_comms.txt
+    cat anomaly_dl_comms.txt
+    cat anomaly_subdl_comms.txt
 
 
 Big network directed 3-cycle cut example
