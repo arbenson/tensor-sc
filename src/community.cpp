@@ -135,6 +135,9 @@ void CommDetection::ProcessSCCs() {
     // want to process all of them because there are many isolated nodes.
     // Instead, we continue processing until the largest community (in terms
     // of the number of nodes) is a SCC.
+    if (networks_.size() >= num_comms_) {
+	return;
+    }
     ProcessSCCs();
 }
 
