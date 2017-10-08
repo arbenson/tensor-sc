@@ -1,7 +1,7 @@
 #include "laplacian.hpp"
 #include "linalg.hpp"
 #include "Snap.h"
-#include "Vector.hpp"
+#include "vector.hpp"
 
 #include <iostream>
 
