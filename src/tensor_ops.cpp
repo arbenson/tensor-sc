@@ -1,6 +1,6 @@
 #include "tensor_ops.hpp"
 #include "linalg.hpp"
-#include "Vector.hpp"
+#include "vector.hpp"
 
 #include <iostream>
 #include <vector>
